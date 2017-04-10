@@ -24,7 +24,7 @@ const engine = require('ejs-mate');
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-dotenv.load({ path: '.env.dev' });//dotenv will frst try to use heroku set variables
+dotenv.load({ path: '.env.example' });//dotenv will frst try to use heroku set variables
 //if it doesnt find this file in prod then it will do nothing, will use heroku environment variables
 
 /**

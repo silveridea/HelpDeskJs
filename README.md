@@ -44,8 +44,14 @@ Prerequisites
 
 Installation
 ------------
+
 ```js
-npm install helpdeskjs --save
+# Get latest version from github
+git clone --depth=1 https://github.com/silveridea/helpdeskjs.git myhelpdesk
+cd myhelpdesk
+
+# Install dependencies
+npm install
 ```
 
 Usage

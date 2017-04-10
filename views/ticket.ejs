@@ -1,0 +1,30 @@
+<% layout('layout') -%>
+
+<div class="page-header">
+	<h3>Contact Form</h3>
+</div>
+<form method="POST" class="form-horizontal">
+	<input type="hidden" name="_csrf" value="<%=_csrf%>" />
+    <div class="form-group">
+		<div class="col-sm-2">
+			<label for="title" class="control-label"><b>Title</b></label>
+		</div>
+		<div class="col-sm-8">
+			<input type="text" name="title" id="title" autofocus="autofocus" class="form-control" />
+		</div>
+	</div>
+    <div class="form-group">
+		<div class="col-sm-2">
+			<label for="request" class="control-label"><b>Request</b></label>
+			<p class="help-block">Please provide a detailed explanation.</p>
+		</div>
+		<div class="col-sm-8">
+			<textarea name="request" id="request" rows="15" class="form-control"></textarea>
+		</div>
+    </div>	
+    <div class="form-group">
+		<div class="col-sm-offset-2 col-sm-8">
+			<button type="submit" class="btn btn-primary"><i class="fa fa-envelope"></i> Send</button>
+	    </div>
+	</div>
+</form>

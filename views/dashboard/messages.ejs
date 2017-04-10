@@ -1,0 +1,38 @@
+<% layout('layout') -%>
+<div class="page-header">
+	<h3>Dashboard - Messages for ticket <%=ticketId%></h3>
+</div>
+<% if (messages1 && messages1.length > 0) { %>
+	<table class="table">
+		<thead>
+		  <tr>
+			<th>Created</th>
+			<th>Text</th>
+		  </tr>
+		</thead>
+		<tbody>
+			<% messages1.forEach(function (message1) { %>
+			<tr>
+				<td style="width:20%"><%= moment(message1.created_at).format('D MMM YYYY') %></td>
+				<td><%-message1.body %></td>
+			</tr>
+			<% }); %>
+		</tbody>
+	</table>
+<% } else { %>
+	<div>No messages yet</div>
+	<br/><br/>
+<% } %>
+<div>
+	<form method="POST" class="form-horizontal">
+		<input type="hidden" name="_csrf" value="<%=_csrf%>" />
+		<input type="hidden" name="ticketid1" id="ticketid1" value="<%=ticketId%>" />
+		<div class="form-group">
+			<label for="comment" class="control-label">Add message</label>
+			<textarea class="form-control" rows="7" name="text1" id="text1"></textarea>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary"><i class="fa fa-envelope"></i> Add message</button>
+		</div>
+	</form>
+</div>

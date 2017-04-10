@@ -1,0 +1,34 @@
+<% layout('layout') -%>
+<div class="page-header">
+	<h3>Dashboard - My Tickets</h3>
+</div>
+<% if (tickets && tickets.length > 0) { %>
+	<table class="table">
+		<thead>
+		  <tr>
+			<th>Title</th>
+			<th>State</th>
+			<th>Created</th>
+			<th>Updated</th>
+			<th>Action</th>
+		  </tr>
+		</thead>
+		<tbody>
+			<% tickets.forEach(function (ticket) { %>
+			<tr>
+				<td><%= ticket.title %></td>
+				<td><%= ticket.state %></td>
+				<td style="width:20%"><%= moment(ticket.created_at).format('D MMM YYYY') %></td>
+				<td style="width:20%"><%= moment(ticket.updated_at).format('D MMM YYYY') %></td>
+				<td><a href="/dashboard/messages/<%=ticket.number%>">View</a></td>
+			</tr>
+			<% }); %>
+		</tbody>
+	</table>
+<% } else { %>
+	<div>No tickets yet</div>
+	<br/><br/>
+<% } %>
+<div>
+	<a class="btn btn-primary" href="/ticket">Create a new ticket</a>
+</div>

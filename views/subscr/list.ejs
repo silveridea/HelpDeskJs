@@ -1,0 +1,122 @@
+<% layout('layout') -%>
+<div class="page-header">
+	<h3>My Subscription</h3>
+</div>
+<div class="form-horizontal">
+	<div class="form-group">
+		<label class="col-sm-12">
+			<span>Subscription type:</span>
+			<span class="text-regular"><%=(user.subscription.subscrType) ? user.subscription.subscrType : 'None'%></span>
+		</label>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-12">
+			<span>Valid until:</span>
+			<span class="text-regular"><%=(user.subscription.subscrValidUntil) ? moment(user.subscription.subscrValidUntil).format('D MMM YYYY') : 'Not valid'%></span>
+		</label>
+	</div>
+</div>
+<br/><br/>
+<div class="page-header">
+	<h3>Outstanding invoices</h3>
+</div>
+<% if (outstandingBills && outstandingBills.length > 0) { %>
+	<table class="table">
+		<thead>
+		  <tr>
+			<th>&nbsp;</th>
+			<th>From</th>
+			<th>To</th>
+			<th>Amount</th>
+			<th>Action</th>
+		  </tr>
+		</thead>
+		<tbody>
+			<% 
+			var totalOutstandingAmount = 0;
+			var billids = "";
+			outstandingBills.forEach(function (bill) { %>
+				<tr>
+					<td>Billing period</td>
+					<td><%= moment(bill.from).format('D MMM YYYY') %></td>
+					<td><%= moment(bill.until).format('D MMM YYYY') %></td>
+					<td><%= bill.price %> USD</td>
+					<td>
+						<% if (outstandingBills.length == 1) { %>
+							<form method="POST">
+							  <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+							  <input type="hidden" name="billid" value="<%=bill.id%>" />
+							  <script src="https://checkout.stripe.com/checkout.js" 
+									  data-image="" 
+									  data-name="<%=process.env.APP_NAME%>"
+									  data-description="<%= moment(bill.from).format('D MMM YYYY') %> - <%= moment(bill.until).format('D MMM YYYY') %>" 
+									  data-amount="<%=bill.price * 100%>" 
+									  data-key="<%=publishableKey%>",
+									  data-email="<%=email%>"
+									  class="stripe-button"></script>
+							</form>
+						<% } else 
+							{ 
+								totalOutstandingAmount += bill.price;
+								billids = billids + bill.id + ";";
+							%>
+							&nbsp;
+						<% } %>
+					</td>
+				</tr>
+			<% }); 
+			if (outstandingBills.length > 1) { %>
+				<tr>
+					<td>Total</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td><%= totalOutstandingAmount %> USD</td>
+					<td>
+						<form method="POST">
+							<input type="hidden" name="_csrf" value="<%=_csrf%>" />
+							<input type="hidden" name="billid" value="<%=billids%>" />
+							<script src="https://checkout.stripe.com/checkout.js" 
+									  data-image="" 
+									  data-name="<%=process.env.APP_NAME%>"
+									  data-description="Outstanding bills" 
+									  data-amount="<%=totalOutstandingAmount * 100%>" 
+									  data-key="<%=publishableKey%>"
+									  data-email="<%=email%>"
+									  data-label="Pay All With Card"
+									  class="stripe-button"></script>
+							</form>
+					</td>
+				</tr>
+			<% } %>
+		</tbody>
+	</table>
+<% } else { %>
+	<div>No outstanding invoices</div>
+<% } %>
+<br/><br/>
+<div class="page-header">
+	<h3>Paid invoices</h3>
+</div>
+<% if (paidBills && paidBills.length > 0) { %>
+	<table class="table">
+		<thead>
+		  <tr>
+			<th>From</th>
+			<th>To</th>
+			<th>Amount paid</th>
+			<th>Paid on</th>
+		  </tr>
+		</thead>
+		<tbody>
+			<% paidBills.forEach(function (bill) { %>
+				<tr>
+					<td><%= moment(bill.from).format('D MMM YYYY') %></td>
+					<td><%= moment(bill.until).format('D MMM YYYY') %></td>
+					<td><%= bill.paidAmount %> USD</td>
+					<td><%= moment(bill.paidDate).format('D MMM YYYY') %></td>
+			<% }); %>
+		</tbody>
+	</table>
+<% } else { %>
+	<div>No paid invoices</div>
+<% } %>

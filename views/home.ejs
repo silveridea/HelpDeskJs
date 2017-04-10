@@ -1,0 +1,32 @@
+<% layout('layout') -%>
+
+<h1><%=process.env.APP_NAME%></h1>
+<p class="lead">Your best helpdesk site</p>
+<hr/>
+<div class="frontpage">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 col-xs-12">
+			<h2>What is <%=process.env.APP_NAME%>?</h2>
+			<p>Here are some details about our HelpDeskJS.
+			<br/>
+				<a href="https://github.com/silveridea/helpdeskjs">Gihtub page</a>
+			</p>
+			<p><a href="http://www.silveridea.net">Visit our website</a></p>
+		</div>
+	</div>
+	<div class="row">
+		<a name="pricing">&nbsp;</a>
+		<div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 col-xs-12">
+			<h2>Pricing</h2>
+			<br/>
+			<p>
+				Price is $<%=process.env.MONTHLY_PRICE%> (USD) per month.
+			</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 col-xs-12">
+			<p><a href="/signup" role="button" class="btn btn-success">Sign Up »</a></p>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,64 @@
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">
+        <i class="fa fa-cube"></i><%=process.env.APP_NAME%>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="<%= (typeof(pagename) !="undefined" && pagename == 'contact') ? 'active' : '' %>" >
+          <a href="/contact">Contact us</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if (!user) { %>
+          <li class="<%= (typeof(pagename) !="undefined" && pagename == 'login') ? 'active' : '' %>">
+            <a href="/login">Login</a>
+          </li>
+          <li class="<%= (typeof(pagename) !="undefined" && pagename == 'signup') ? 'active' : '' %>">
+            <a href="/signup">Sign up</a>
+          </li>
+          <% } else { %>
+          <li class="dropdown">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+              <% if (user.profile.picture) { %>
+                <img src="<%= user.profile.picture %>" />
+                <% } else { %>
+                <img src="<%= user.gravatar(60) %>" />
+                <% } %>
+                <span>
+                  <%= user.profile.name || user.email || user.id %>
+                </span>
+                <i class="caret"></i>
+              </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="/dashboard">Dashboard</a>
+              </li>
+              <li>
+                <a class='header-link-special' href="/ticket">Create New Ticket</a>
+              </li>
+              <li>
+                <a href="/account">My Account</a>
+              </li>
+              <li>
+                <a href="/subscr">My Subscriptions</a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="/logout">Logout</a>
+              </li>
+            </ul>
+          </li>
+          <% } %>
+      </ul>
+    </div>
+  </div>
+</div>

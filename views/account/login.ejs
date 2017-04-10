@@ -1,0 +1,44 @@
+<% layout('layout') -%>
+
+<div class="page-header">
+<h3>Sign in</h3>
+</div>
+<form method="POST" class="form-horizontal">
+	<input type="hidden" name="_csrf" value="<%=_csrf%>" />
+	<div class="form-group">
+		<label for="email" class="col-sm-3 control-label">Email</label>
+		<div class="col-sm-7">
+		<input type="email" name="email" id="email" placeholder="Email" autofocus="autofocus" required="required" class="form-control"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="password" class="col-sm-3 control-label">Password</label>
+		<div class="col-sm-7">
+		<input type="password" name="password" id="password" placeholder="Password" required="required" class="form-control"/>
+		</div>
+	</div>
+	<!--<div class="col-sm-offset-3 col-sm-7 remember">
+		<input type="checkbox" name="remember" id="remember" class="form-control"/>
+		<label for="remember">Remember me</label>
+	</div>-->
+	<div class="form-group">
+		<div class="col-sm-offset-3 col-sm-7">
+			<button type="submit" class="col-sm-3 btn btn-primary"><i class="fa fa-user"></i>Login</button><a href="/forgot" class="btn btn-link">Forgot your password?</a>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-3 col-sm-7">
+		<hr/>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-3 col-sm-7">
+			<!--<a href="/auth/facebook" class="btn btn-block btn-facebook btn-social"><i class="fa fa-facebook"></i>Sign in with Facebook</a>
+			<a href="/auth/twitter" class="btn btn-block btn-twitter btn-social"><i class="fa fa-twitter"></i>Sign in with Twitter</a>-->
+			<a href="/auth/google" class="btn btn-block btn-google btn-social"><i class="fa fa-google-plus"></i>Sign in with Google</a>
+			<!--<a href="/auth/github" class="btn btn-block btn-github btn-social"><i class="fa fa-github"></i>Sign in with GitHub</a>
+			<a href="/auth/linkedin" class="btn btn-block btn-linkedin btn-social"><i class="fa fa-linkedin"></i>Sign in with LinkedIn</a>
+			<a href="/auth/instagram" class="btn btn-block btn-instagram btn-social"><i class="fa fa-instagram"></i>Sign in with Instagram</a>-->
+		</div>
+	</div>
+</form>

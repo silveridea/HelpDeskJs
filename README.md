@@ -45,7 +45,7 @@ Prerequisites
 Installation
 ------------
 
-```js
+```bash
 # Get latest version from github
 git clone --depth=1 https://github.com/silveridea/helpdeskjs.git myhelpdesk
 cd myhelpdesk
@@ -63,7 +63,7 @@ MONTHLY_PRICE is the price per month for your service in USD.
 See obtaining API keys section below.
 
 start your mongodb
-```js
+```bash
 npm start
 ```
   
